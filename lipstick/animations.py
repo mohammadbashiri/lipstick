@@ -161,3 +161,21 @@ def scatter_gif(
         html = display.HTML(video)
         display.display(html)
     plt.close()
+
+
+def line_gif(
+    xs,
+    ys,
+    fps,
+    fig_kws=None,
+    scatter_kws=None,
+    show=True,
+    repeat=True,
+    repeat_delay=0.0,
+    save=False,
+    filename=None,
+    ax_manipulator=None,
+    tight_layout=True,
+):
+
+    raise NotImplementedError
