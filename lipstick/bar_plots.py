@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def differential_bar(
+def cumulative_bar(
     left_data,
     right_data,
     left_color="navy",

@@ -1,5 +1,36 @@
 # lipstick
 
+## Examples
+
+### Creating gif
+
+``` python
+import numpy as np
+import matplotlib.pyplot as plt
+from lipstick import GifMaker
+
+with GifMaker("sample.gif") as g:
+    
+    for i in range(30): # go through the iteration
+
+        # create a figure
+        fig, ax = plt.subplots(figsize=(2, 2), dpi=150)
+        ax.imshow(np.random.rand(3, 3))
+        ax.text(2, 2, i, ha='center', va='center')
+        ax.set(xticks=[], yticks=[])
+        
+        # add the figure object to GifMaker object
+        g.add(fig)
+        
+g.show()
+```
+
+Here is the results:
+<p align="center">
+  <img width="300" height="300" src="images/sample.gif">
+</p>
+
+---
 - [ ] Scatter plot with histograms
   - hist per axis -> up and right ([link1](https://matplotlib.org/3.1.0/gallery/lines_bars_and_markers/scatter_hist.html#sphx-glr-gallery-lines-bars-and-markers-scatter-hist-py), [link2](https://matplotlib.org/3.1.0/gallery/axes_grid1/scatter_hist_locatable_axes.html#sphx-glr-gallery-axes-grid1-scatter-hist-locatable-axes-py))
   - hist for difference of axes -> hist on the diagonal
