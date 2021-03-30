@@ -2,31 +2,31 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def scatter_diag(x, y, fig_kwgs=None, scatter_kwgs=None, diag_kwgs=None):
+def scatter_diag(x, y, fig_kws=None, scatter_kws=None, diag_kws=None):
 
-    fig_kwgs = fig_kwgs if fig_kwgs is not None else {}
+    fig_kws = fig_kws if fig_kws is not None else {}
 
-    if fig_kwgs is not None:
+    if fig_kws is not None:
         pass
     else:
-        fig_kwgs = {"figsize": (5.5, 5.5)}
+        fig_kws = {"figsize": (5.5, 5.5)}
 
-    fig, ax = plt.subplots(**fig_kwgs)
+    fig, ax = plt.subplots(**fig_kws)
 
     # the scatter plot:
-    scatter_kwgs = (
-        scatter_kwgs
-        if scatter_kwgs is not None
+    scatter_kws = (
+        scatter_kws
+        if scatter_kws is not None
         else {"c": "k", "ec": "w", "linewidth": 0.5}
     )
-    ax.scatter(x, y, **scatter_kwgs)
+    ax.scatter(x, y, **scatter_kws)
     ax.set_aspect(1.0)
 
     min_lim = min(min(x), min(y))
     max_lim = max(max(x), max(y))
 
-    diag_kwgs = diag_kwgs if diag_kwgs is not None else {"c": ".4", "ls": "--"}
-    ax.plot([min_lim, max_lim], [min_lim, max_lim], max_lim, **diag_kwgs)
+    diag_kws = diag_kws if diag_kws is not None else {"c": ".4", "ls": "--"}
+    ax.plot([min_lim, max_lim], [min_lim, max_lim], max_lim, **diag_kws)
 
     return fig, ax
 
@@ -37,35 +37,53 @@ def scatter_hist(
     diag_on=False,
     x_hist_height=1.0,
     y_hist_width=1.0,
-    fig_kwgs=None,
-    scatter_kwgs=None,
-    diag_kwgs=None,
-    hist_kwgs=None,
+    fig_kws=None,
+    scatter_kws=None,
+    diag_kws=None,
+    hist_kws=None,
     binwidth=0.1,
 ):
+    """
+    Scatter plot with histograms of x and y data.
+
+    Args:
+        x ([type]): [description]
+        y ([type]): [description]
+        diag_on (bool, optional): [description]. Defaults to False.
+        x_hist_height (float, optional): [description]. Defaults to 1.0.
+        y_hist_width (float, optional): [description]. Defaults to 1.0.
+        fig_kws ([type], optional): [description]. Defaults to None.
+        scatter_kws ([type], optional): [description]. Defaults to None.
+        diag_kws ([type], optional): [description]. Defaults to None.
+        hist_kws ([type], optional): [description]. Defaults to None.
+        binwidth (float, optional): [description]. Defaults to 0.1.
+
+    Returns:
+        [type]: [description]
+    """
 
     from mpl_toolkits.axes_grid1 import make_axes_locatable
 
-    fig_kwgs = fig_kwgs if fig_kwgs is not None else {}
+    fig_kws = fig_kws if fig_kws is not None else {}
 
-    if fig_kwgs is not None:
+    if fig_kws is not None:
         pass
     else:
-        fig_kwgs = {"figsize": (5.5, 5.5)}
+        fig_kws = {"figsize": (5.5, 5.5)}
 
-    fig, axScatter = plt.subplots(**fig_kwgs)
+    fig, axScatter = plt.subplots(**fig_kws)
 
     # the scatter plot:
-    scatter_kwgs = scatter_kwgs if scatter_kwgs is not None else {"s": 10, "color": "k"}
-    axScatter.scatter(x, y, **scatter_kwgs)
+    scatter_kws = scatter_kws if scatter_kws is not None else {"s": 10, "color": "k"}
+    axScatter.scatter(x, y, **scatter_kws)
     axScatter.set_aspect(1.0)
 
     if diag_on:
         min_lim = min(min(x), min(y))
         max_lim = max(max(x), max(y))
 
-        diag_kwgs = diag_kwgs if diag_kwgs is not None else {"c": ".4", "ls": "--"}
-        axScatter.plot([min_lim, max_lim], [min_lim, max_lim], max_lim, **diag_kwgs)
+        diag_kws = diag_kws if diag_kws is not None else {"c": ".4", "ls": "--"}
+        axScatter.plot([min_lim, max_lim], [min_lim, max_lim], max_lim, **diag_kws)
 
     # create new axes on the right and on the top of the current axes
     # The first argument of the new_vertical(new_horizontal) method is
@@ -78,8 +96,8 @@ def scatter_hist(
     axHistx.xaxis.set_tick_params(labelbottom=False)
     axHisty.yaxis.set_tick_params(labelleft=False)
 
-    if hist_kwgs is not None:
-        if "bins" not in hist_kwgs.keys():
+    if hist_kws is not None:
+        if "bins" not in hist_kws.keys():
             min_lim = min(min(x), min(y))
             max_lim = max(max(x), max(y))
             drange = max_lim - min_lim
@@ -93,11 +111,11 @@ def scatter_hist(
         bins = np.arange(
             min_lim - 0.1 * drange, max_lim + 0.1 * drange + binwidth, binwidth
         )
-        hist_kwgs = {"color": "k"}
+        hist_kws = {"color": "k"}
 
         print(bins[:5])
 
-    axHistx.hist(x, bins=bins, **hist_kwgs)
-    axHisty.hist(y, bins=bins, orientation="horizontal", **hist_kwgs)
+    axHistx.hist(x, bins=bins, **hist_kws)
+    axHisty.hist(y, bins=bins, orientation="horizontal", **hist_kws)
 
-    return fig, axScatter, axHistx, axHisty
+    return fig, (axScatter, axHistx, axHisty)
