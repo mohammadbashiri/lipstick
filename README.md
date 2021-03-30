@@ -11,7 +11,7 @@ from lipstick import GifMaker
 
 with GifMaker("sample.gif") as g:
     
-    for i in range(30): # go through the iteration
+    for i in range(30): # go through the frames
 
         # create a figure
         fig, ax = plt.subplots(figsize=(2, 2), dpi=150)
@@ -19,7 +19,7 @@ with GifMaker("sample.gif") as g:
         ax.text(2, 2, i, ha='center', va='center')
         ax.set(xticks=[], yticks=[])
         
-        # add the figure object to GifMaker object
+        # add the figure object to the GifMaker
         g.add(fig)
         
 g.show()

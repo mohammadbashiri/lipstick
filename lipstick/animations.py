@@ -9,6 +9,14 @@ import matplotlib.pyplot as plt
 
 class GifMaker:
     def __init__(self, filename, fps=30.0):
+        """
+        Saves gif from added figures.
+
+        Args:
+            filename (str): full path and filename of the resulting gif (e.g. "sample.gif")
+            fps (float, optional): Frames per second. Defaults to 30.0.
+        """
+
         self.path = "/".join(filename.split(".")[0].split("/")[:-1])
         self.path = self.path if self.path else os.getcwd()
         self.name = filename.split(".")[0].split("/")[-1]

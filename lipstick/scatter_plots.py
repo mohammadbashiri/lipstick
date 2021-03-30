@@ -3,6 +3,12 @@ import matplotlib.pyplot as plt
 
 
 def scatter_diag(x, y, fig_kws=None, scatter_kws=None, diag_kws=None):
+    """
+    Scatter plot with diagonal line.
+
+    Returns:
+        tuple: fig, ax
+    """
 
     fig_kws = fig_kws if fig_kws is not None else {}
 
@@ -46,20 +52,8 @@ def scatter_hist(
     """
     Scatter plot with histograms of x and y data.
 
-    Args:
-        x ([type]): [description]
-        y ([type]): [description]
-        diag_on (bool, optional): [description]. Defaults to False.
-        x_hist_height (float, optional): [description]. Defaults to 1.0.
-        y_hist_width (float, optional): [description]. Defaults to 1.0.
-        fig_kws ([type], optional): [description]. Defaults to None.
-        scatter_kws ([type], optional): [description]. Defaults to None.
-        diag_kws ([type], optional): [description]. Defaults to None.
-        hist_kws ([type], optional): [description]. Defaults to None.
-        binwidth (float, optional): [description]. Defaults to 0.1.
-
     Returns:
-        [type]: [description]
+        tuple: fig, (scatter_axis, hist_x_axis, hist_y_axis)
     """
 
     from mpl_toolkits.axes_grid1 import make_axes_locatable
