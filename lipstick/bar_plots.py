@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def cumulative_bar(*arrays, linewidth=1, bar_color=None, fig_kws=None):
+def cumulative_bar(*arrays, linewidth=1, bar_color=None, ax=None, zorder=None):
     """
     Cumulative bar plot.
 
@@ -13,14 +13,17 @@ def cumulative_bar(*arrays, linewidth=1, bar_color=None, fig_kws=None):
             - a single color as a string or array of RGB values.
             - a list containing the colors for the bars of each array.
             - a list of lists containing the color of every single bar.
-        fig_kws (dict, optional): arguments used for figure initialiyation. Defaults to None.
+        ax (matplotlib.axes, optional): matplotlib axis object to plot on. If not passed, one will be created.
 
     Returns:
         (tuple): figure, axis
     """
 
-    fig_kws = fig_kws if fig_kws is not None else {}
-    fig, ax = plt.subplots(**fig_kws)
+    if ax is not None:
+        ax = ax
+        fig = plt.gcf()
+    else:
+        fig, ax = plt.subplots()
 
     default_color = "k"
 
@@ -53,14 +56,16 @@ def cumulative_bar(*arrays, linewidth=1, bar_color=None, fig_kws=None):
             edgecolor=default_color,
             color=bar_color[data_i],
             linewidth=linewidth,
+            zorder=zorder,
         )
 
         for i in range(len(data) - 1):
-            plt.plot(
+            ax.plot(
                 [left_edges[i + 1], right_edges[i]],
                 [data[i], data[i]],
                 c=default_color,
                 lw=linewidth,
+                zorder=zorder,
             )
 
     ax.set(xticks=np.arange(len(arrays)))
