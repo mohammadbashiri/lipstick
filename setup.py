@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="lipstick",
-    version="0.0.4",
+    version="0.0.6",
     author="Mohammad Bashiri",
     author_email="mohammadbashiri93@gmail.com",
     description="A collection of plotting functions.",

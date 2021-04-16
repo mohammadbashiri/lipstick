@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def scatter_diag(x, y, fig_kws=None, scatter_kws=None, diag_kws=None):
+def scatter_diag(x, y, scatter_kws=None, diag_kws=None, ax=None, share_ticks=False):
     """
     Scatter plot with diagonal line.
 
@@ -10,14 +10,11 @@ def scatter_diag(x, y, fig_kws=None, scatter_kws=None, diag_kws=None):
         tuple: fig, ax
     """
 
-    fig_kws = fig_kws if fig_kws is not None else {}
-
-    if fig_kws is not None:
-        pass
+    if ax is not None:
+        ax = ax
+        fig = plt.gcf()
     else:
-        fig_kws = {"figsize": (5.5, 5.5)}
-
-    fig, ax = plt.subplots(**fig_kws)
+        fig, ax = plt.subplots()
 
     # the scatter plot:
     scatter_kws = (
@@ -28,11 +25,26 @@ def scatter_diag(x, y, fig_kws=None, scatter_kws=None, diag_kws=None):
     ax.scatter(x, y, **scatter_kws)
     ax.set_aspect(1.0)
 
-    min_lim = min(min(x), min(y))
-    max_lim = max(max(x), max(y))
-
     diag_kws = diag_kws if diag_kws is not None else {"c": ".4", "ls": "--"}
-    ax.plot([min_lim, max_lim], [min_lim, max_lim], max_lim, **diag_kws)
+
+    if share_ticks:
+        tick_idx = np.where(
+            [
+                len(ax.get_xticks()) > len(ax.get_yticks()),
+                len(ax.get_xticks()) <= len(ax.get_yticks()),
+            ]
+        )[0].item()
+        ticks = [ax.get_xticks(), ax.get_yticks()][tick_idx]
+        ax.set(xticks=ticks, yticks=ticks)
+
+        min_lim = ticks.min()
+        max_lim = ticks.max()
+        ax.plot([min_lim, max_lim], [min_lim, max_lim], max_lim, **diag_kws)
+
+    else:
+        min_lim = min(min(x), min(y))
+        max_lim = max(max(x), max(y))
+        ax.plot([min_lim, max_lim], [min_lim, max_lim], max_lim, **diag_kws)
 
     return fig, ax
 
