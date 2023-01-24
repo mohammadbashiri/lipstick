@@ -1,10 +1,27 @@
 import os
 import glob
 import shutil
+import time
 from pathlib import Path
 from PIL import Image
 from IPython import display
+import numpy as np
 import matplotlib.pyplot as plt
+
+
+def update_fig(fig, axes, sleep=0):
+    display.clear_output(wait=True)
+    display.display(fig)
+    time.sleep(sleep)
+    if isinstance(axes, list) or isinstance(axes, tuple):
+        for ax in axes:
+            ax.clear()
+    elif isinstance(axes, np.ndarray):
+        for ax in axes.flatten():
+            ax.clear()
+    else:
+        axes.clear()
+    plt.close()
 
 
 class GifMaker:
