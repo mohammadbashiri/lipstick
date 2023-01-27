@@ -1,8 +1,26 @@
-# lipstick
+# Lipstick 💄
 
-## Examples
+Lipstick is a simple, lightweight set of tools for creating beautiful visualizations.
+Just apply some lipstick to your data and you're ready to go!
 
-### Creating gif
+## Installation
+Install the latest version of Lipstick with `pip`:
+
+```bash
+pip install lipstick
+```
+
+or install the latest development version from GitHub:
+
+```bash
+pip install git+git://github.com/mohammadbashiri/lipstick.git
+```
+
+## Usage
+
+### Creating a gif
+Creating animated gifs is a piece of cake with Lipstick.
+```python
 
 ``` python
 import numpy as np
@@ -25,10 +43,12 @@ with GifMaker("sample.gif") as g:
 g.show()
 ```
 
-Here is the results:
+Here are the results:
 <p align="center">
   <img width="300" height="300" src="images/sample.gif">
 </p>
+
+
 
 ---
 - [ ] Scatter plot with histograms
