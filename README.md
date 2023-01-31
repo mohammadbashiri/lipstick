@@ -52,7 +52,7 @@ g.show()
 
 ### Updating the displayed figure in a loop
 
-You have a loop and you want to update the same figure (with new results) as go through the loop? You can also use the `update_fig` method:
+You have a loop and you want to update the same figure (with new results) as you go through the loop? You can also use the `update_fig` method:
 
 <p align="center">
   <img width="450" height="600" src="images/update_fig_demo.gif">
