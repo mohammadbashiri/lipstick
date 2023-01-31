@@ -60,4 +60,4 @@ You have a loop and you want to update the same figure (with new results) as go 
 
 ## :bug: Report bugs (or request features)
 
-In case you find a bug or would like to see some new features added to nnfabrik, please create an issue or make a PR .
+In case you find a bug or would like to see some new features added to nnfabrik, please create an issue or make a PR :star2:.
