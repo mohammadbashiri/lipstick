@@ -4,6 +4,7 @@ Lipstick is a simple, lightweight set of tools for creating beautiful visualizat
 Just apply some lipstick to your data and you're ready to go!
 
 ## Installation
+
 Install the latest version of Lipstick with `pip`:
 
 ```bash
@@ -19,7 +20,9 @@ pip install git+git://github.com/mohammadbashiri/lipstick.git
 ## Usage
 
 ### Creating a gif
-Creating animated gifs is a piece of cake with Lipstick.
+
+Creating animated gifs is easy with Lipstick.
+
 ```python
 
 ``` python
@@ -43,23 +46,18 @@ with GifMaker("sample.gif") as g:
 g.show()
 ```
 
-Here are the results:
 <p align="center">
   <img width="300" height="300" src="images/sample.gif">
 </p>
 
+### Updating the displayed figure in a loop
 
+You have a loop and you want to update the same figure (with new results) as go through the loop? You can also use the `update_fig` method:
 
----
-- [ ] Scatter plot with histograms
-  - hist per axis -> up and right ([link1](https://matplotlib.org/3.1.0/gallery/lines_bars_and_markers/scatter_hist.html#sphx-glr-gallery-lines-bars-and-markers-scatter-hist-py), [link2](https://matplotlib.org/3.1.0/gallery/axes_grid1/scatter_hist_locatable_axes.html#sphx-glr-gallery-axes-grid1-scatter-hist-locatable-axes-py))
-  - hist for difference of axes -> hist on the diagonal
-- [ ] scatter plot with diagonal line
-- [ ] [annotated heatmaps](https://matplotlib.org/3.1.0/gallery/images_contours_and_fields/image_annotated_heatmap.html#sphx-glr-gallery-images-contours-and-fields-image-annotated-heatmap-py)
-- [ ] [multi-column/row subplot layouts](https://matplotlib.org/3.1.0/gallery/subplots_axes_and_figures/gridspec_multicolumn.html#sphx-glr-gallery-subplots-axes-and-figures-gridspec-multicolumn-py)
-- [ ] [Zoom region inset axes](https://matplotlib.org/3.1.0/gallery/subplots_axes_and_figures/zoom_inset_axes.html#sphx-glr-gallery-subplots-axes-and-figures-zoom-inset-axes-py)
-- [ ] [Scatter plot on polar axis](https://matplotlib.org/3.1.0/gallery/pie_and_polar_charts/polar_scatter.html#sphx-glr-gallery-pie-and-polar-charts-polar-scatter-py)
-- [ ] [math in plots](https://matplotlib.org/3.1.0/gallery/text_labels_and_annotations/usetex_demo.html#sphx-glr-gallery-text-labels-and-annotations-usetex-demo-py)
-- [ ] [creating colormaps](https://matplotlib.org/3.1.0/gallery/color/custom_cmap.html#sphx-glr-gallery-color-custom-cmap-py)
-- [ ] [Anchored Direction Arrow](https://matplotlib.org/3.1.0/gallery/axes_grid1/demo_anchored_direction_arrows.html#sphx-glr-gallery-axes-grid1-demo-anchored-direction-arrows-py)
-- [ ] [rotated axis](https://matplotlib.org/3.1.0/gallery/axisartist/demo_floating_axes.html#sphx-glr-gallery-axisartist-demo-floating-axes-py)
+<p align="center">
+  <img width="450" height="600" src="images/update_fig_demo.gif">
+</p>
+
+## :bug: Report bugs (or request features)
+
+In case you find a bug or would like to see some new features added to nnfabrik, please create an issue or make a PR .
