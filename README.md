@@ -17,7 +17,7 @@ or install the latest development version from GitHub:
 pip install git+git://github.com/mohammadbashiri/lipstick.git
 ```
 
-## Usage
+## Example usage
 
 ### Creating a gif
 
