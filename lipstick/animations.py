@@ -32,7 +32,7 @@ class GifMaker:
         Args:
             filename (str): full path and filename of the resulting gif (e.g. "sample.gif")
             fps (float, optional): Frames per second. Defaults to 30.0.
-            dpi (int, optional): Dots per inch of each image. Defaults to 100. Choose 150 for high quality gifs.
+            dpi (int, optional): Dots per inch of each image. Defaults to the dpi setting of the matplotlib figure which is being passed. Choose 150 for high quality gifs.
             temp_dir_name (str, optional): Name of the temporary directory. Defaults to "gifmaker_cache".
             keep_dir (bool, optional): If True, the temporary directory is not deleted. Useful when trying to create videos with custom ffmpeg commands. Defaults to False.
 
