@@ -25,7 +25,7 @@ def update_fig(fig, axes, sleep=0):
 
 
 class GifMaker:
-    def __init__(self, filename, fps=30.0, dpi=100, temp_dir_name="gifmaker_cache", keep_dir=False,):
+    def __init__(self, filename, fps=30.0, dpi='figure', temp_dir_name="gifmaker_cache", keep_dir=False,):
         """
         Saves gif from added figures.
 
