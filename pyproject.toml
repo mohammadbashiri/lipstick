@@ -21,11 +21,16 @@ dependencies = [
     "figrid @ git+https://github.com/dougollerenshaw/figrid"
 ]
 
-[project.urls]
-Homepage = "https://github.com/mohammadbashiri/lipstick"
-
 [tool.setuptools.packages.find]
-where = ["lipstick"]
+where = ["src"]  
 
 [tool.pytest.ini_options]
-pythonpath = "lipstick"
+pythonpath = "src"
+
+filterwarnings = [
+    # note the use of single quote below to denote "raw" strings in TOML
+    'ignore::DeprecationWarning',
+]
+
+[project.urls]
+Homepage = "https://github.com/mohammadbashiri/lipstick"
