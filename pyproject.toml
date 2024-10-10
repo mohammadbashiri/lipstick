@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lipstick"
+version = "0.0.8"
+description = "A collection of plotting functions."
+authors = [
+    {name = "Mohammad Bashiri", email = "mohammadbashiri93@gmail.com"},
+]
+readme = "README.md"
+requires-python = ">=3.6"
+keywords = ["plotting", "visualization"]
+license = {text = "MIT"}
+
+dependencies = [
+    "numpy",
+    "matplotlib>=3.3.0",
+    "pillow>=7.2.0",
+    "figrid @ git+https://github.com/dougollerenshaw/figrid"
+]
+
+[project.urls]
+Homepage = "https://github.com/mohammadbashiri/lipstick"
+
+[tool.setuptools.packages.find]
+where = ["lipstick"]
+
+[tool.pytest.ini_options]
+pythonpath = "lipstick"
