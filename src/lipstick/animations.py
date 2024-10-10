@@ -24,7 +24,7 @@ def update_fig(fig, axes, sleep=0):
 
 
 class GifMaker:
-    def __init__(self, filename, fps=30.0, dpi='figure', temp_dir_name="gifmaker_cache", keep_dir=False):
+    def __init__(self, filename, fps=30.0, dpi='figure', temp_dir_name="gifmaker_cache", keep_dir=False, loop=0):
         """
         Saves gif from added figures.
 
@@ -50,6 +50,7 @@ class GifMaker:
         self.temp_dir = Path(temp_dir_name)
         self.i = 0
         self.keep_dir = keep_dir
+        self.loop = loop
 
         # Ensure the directory for output exists
         self.path.mkdir(parents=True, exist_ok=True)
@@ -66,7 +67,7 @@ class GifMaker:
         fp_out = self.path / f"{self.name}.gif"
 
         imgs = [imageio.imread(f) for f in sorted(glob.glob(fp_in))]
-        imageio.mimsave(fp_out, imgs, 'GIF', fps=self.fps)
+        imageio.mimsave(fp_out, imgs, 'GIF', fps=self.fps, loop=self.loop)
         print(f"GIF saved to {fp_out}")
 
     def show(self):
