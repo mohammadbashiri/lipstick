@@ -43,7 +43,20 @@ def add_axis(fig, main_ax, width=0.2, height=0.2, location=(0.7, 0.7), relative_
         raise ValueError("relative_to must be either 'fig' or 'ax'")
     return new_ax
 
-def place_axes_on_grid(axes_list, output_path=None, n_cols=3, figsize=None, figscale=1, row_spacing=0.05, col_spacing=0.05, dpi=300, fixed_grid=True, x_offsets=None, y_offsets=None):
+def place_axes_on_grid(
+    axes_list, 
+    output_path=None, 
+    n_cols=3, 
+    figsize=None, 
+    figscale=1, 
+    row_spacing=0.05, 
+    col_spacing=0.05, 
+    dpi=300, 
+    fixed_grid=True, 
+    x_offsets=None, 
+    y_offsets=None, 
+    verbose=False
+    ):
     """
     Create a figure layout using figrid and save it as a vectorized format.
 
@@ -97,15 +110,14 @@ def place_axes_on_grid(axes_list, output_path=None, n_cols=3, figsize=None, figs
     row_spacing = row_spacing * figsize[0] / figsize[1]
     fig = plt.figure(figsize=figsize, dpi=dpi)
 
-    max_col_spacing = (1 / n_cols) / 2
-    max_row_spacing = (1 / n_rows) / 2
-    col_spacing = min(col_spacing, max_col_spacing)
-    row_spacing = min(row_spacing, max_row_spacing)
+    max_col_spacing = (1 / n_cols)
+    max_row_spacing = (1 / n_rows)
+    ws = min(col_spacing, max_col_spacing)
+    hs = min(row_spacing, max_row_spacing)
 
-    if not fixed_grid and n_axes % n_cols != 0:
-        last_row_cols = n_axes % n_cols
-    else:
-        last_row_cols = n_cols
+    last_row_cols = n_axes % n_cols
+    w = (1-ws*(n_cols - 1))/n_cols
+    h = (1-hs*(n_rows - 1))/n_rows
 
     axes = {}
     for i in range(n_axes):
@@ -113,18 +125,24 @@ def place_axes_on_grid(axes_list, output_path=None, n_cols=3, figsize=None, figs
         col_idx = i % n_cols
 
         if fixed_grid or row_idx < n_rows - 1:
-            x_start = max(0, min(col_idx / n_cols + col_spacing, 1))
-            x_end = max(0, min((col_idx + 1) / n_cols - col_spacing, 1))
-            y_start = max(0, min(row_idx / n_rows + row_spacing, 1))
-            y_end = max(0, min((row_idx + 1) / n_rows - row_spacing, 1))
+            x_start = col_idx * (w + ws)
+            x_end = x_start + w
+            y_start = row_idx * (h + hs)
+            y_end = y_start + h
         else:
-            x_start = max(0, col_idx / last_row_cols + col_spacing)
-            x_end = min(1, (col_idx + 1) / last_row_cols - col_spacing)
-            y_start = max(0, min(row_idx / n_rows + row_spacing, 1))
-            y_end = max(0, min((row_idx + 1) / n_rows - row_spacing, 1))
-
-        y_end = y_end - min(0, y_end - y_start - .01)
-        axes[f'ax_{i}'] = fg.place_axes_on_grid(fig, xspan=[x_start + x_offsets[i], x_end + x_offsets[i]], yspan=[y_start + y_offsets[i], y_end + y_offsets[i]])
+            ws = (1 - last_row_cols * w) / (last_row_cols+1)
+            x_start = col_idx * (w + ws) + ws
+            x_end = x_start + w
+            y_start = row_idx * (h + hs)
+            y_end = y_start + h
+        
+        x_start = max(0, x_start + x_offsets[i])
+        x_end = min(1, x_end + x_offsets[i])
+        y_start = max(0, y_start + y_offsets[i])
+        y_end = min(1, y_end + y_offsets[i])
+        if verbose:
+            print(f"x_start = {x_start:.2f}, x_end = {x_end:.2f} | y_start = {y_start:.2f}, y_end = {y_end:.2f}")
+        axes[f'ax_{i}'] = fg.place_axes_on_grid(fig, xspan=[x_start, x_end], yspan=[y_start, y_end])
 
     for i, plot_func in enumerate(axes_list):
         plot_func(fig, axes[f'ax_{i}'])
