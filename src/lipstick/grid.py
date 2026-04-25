@@ -1,6 +1,5 @@
 import os
 import matplotlib.pyplot as plt
-import figrid as fg
 import math
 
 def add_axis(fig, main_ax, width=0.2, height=0.2, location=(0.7, 0.7), relative_to='ax'):
@@ -142,7 +141,7 @@ def place_axes_on_grid(
         y_end = min(1, y_end + y_offsets[i])
         if verbose:
             print(f"x_start = {x_start:.2f}, x_end = {x_end:.2f} | y_start = {y_start:.2f}, y_end = {y_end:.2f}")
-        axes[f'ax_{i}'] = fg.place_axes_on_grid(fig, xspan=[x_start, x_end], yspan=[y_start, y_end])
+        axes[f'ax_{i}'] = fig.add_axes([x_start, 1 - y_end, x_end - x_start, y_end - y_start])
 
     for i, plot_func in enumerate(axes_list):
         plot_func(fig, axes[f'ax_{i}'])

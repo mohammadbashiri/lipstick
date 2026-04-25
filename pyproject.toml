@@ -18,8 +18,8 @@ dependencies = [
     "numpy",
     "matplotlib>=3.3.0",
     "pillow>=7.2.0",
-    "figrid @ git+https://github.com/dougollerenshaw/figrid"
 ]
+
 
 [tool.setuptools.packages.find]
 where = ["src"]  
