@@ -34,3 +34,11 @@ filterwarnings = [
 
 [project.urls]
 Homepage = "https://github.com/mohammadbashiri/lipstick"
+
+[dependency-groups]
+dev = [
+    "ipython",
+    "ipykernel",
+    "jupyterlab",
+    "seaborn",
+]
